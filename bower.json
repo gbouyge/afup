@@ -1,0 +1,10 @@
+{
+  "name": "afup-planning",
+  "version": "0.0.1",
+  "dependencies": {
+    "bootstrap": "~3.1.0",
+    "angular" : null
+
+  },
+  "private": true
+}

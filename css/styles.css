@@ -1,0 +1,48 @@
+body {
+    padding-top: 50px;
+    font-size: 12px;
+    background-color: #272B30;
+}
+
+.agenda {
+	padding-top: 10px;
+}
+
+#calendar {
+	background-color: white;
+}
+
+.session {
+	padding-top: 10px;
+}
+
+.profile {
+    min-height: 250px;
+    display: inline-block;
+}
+
+.img-responsive {
+    margin: 0 auto;
+}
+
+.print {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+#search {
+    padding: 5px;
+}
+
+#search form label {
+    color: #fff;
+}
+
+#search form input {
+    padding: 0;
+}
+
+#search form select {
+    height: 22px;
+    min-width: 152px;
+}
