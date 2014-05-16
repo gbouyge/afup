@@ -60,7 +60,9 @@
         <div class="col-md-7 agenda">
           <div id="calendar"></div>
         </div>
-        <div class="col-md-5 session"></div>
+        <div class="col-md-5 session">
+            <div class="well profile" ng-repeat="conf in confs" ng-include="'partials/session.html'"></div>
+        </div>
       </div>
     </div><!-- /.container -->
 	
