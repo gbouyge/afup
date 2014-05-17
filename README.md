@@ -30,4 +30,6 @@
 
 ### Récupération des données sur le site de l'afup via CasperJS
 
+> cd tools
+
 > casperjs getAfupData.js
