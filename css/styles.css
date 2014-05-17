@@ -19,6 +19,7 @@ body {
 .profile {
     min-height: 250px;
     display: inline-block;
+    width:100%;
 }
 
 .img-responsive {
