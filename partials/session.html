@@ -14,8 +14,8 @@
     </div>
 <div class="col-xs-12 col-sm-3 text-center">
       <div ng-repeat="conferencier in conf.conferenciers" class="conferencier">
-        <a href="http://afup.org/pages/phptourlyon2014/conferenciers.php#{{conferencier.id}}">
-            <p><img src="http://afup.org/templates/phptourlyon2014/images/intervenants/{{conferencier.id}}.jpg" alt="" class="img-thumbnail img-responsive"/></p>
+        <a href="{{buildAfupUrl(conferencier.id, 'link')}}">
+            <p><img src="{{buildAfupUrl(conferencier.id, 'img')}}" alt="" class="img-thumbnail img-responsive"/></p>
             <p>{{conferencier.name}}</p>
         </a>
     </div>

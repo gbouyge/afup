@@ -1,7 +1,6 @@
 body {
     padding-top: 50px;
-    font-size: 12px;
-    background-color: #272B30;
+    /*background-color: #272B30;*/
 }
 
 .agenda {
@@ -47,3 +46,21 @@ body {
     height: 22px;
     min-width: 152px;
 }
+
+.search {
+   padding-top: 10px; 
+}
+
+#search-full {
+    background-color: #F5F5F5;
+    border-color: #DDDDDD;
+    border-radius: 4px 4px 0 0;
+    border-width: 1px;
+    box-shadow: none;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    padding: 19px;
+}
+
+
