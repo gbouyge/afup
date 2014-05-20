@@ -26,7 +26,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
 			for(var filtername in $scope.filters){
 				conf_attr_name = $scope.filters[filtername];
 				if (!inArray(conf[conf_attr_name],$scope[filtername])) {
-					$scope[filtername].push(conf[conf_attr_name]);
+                    $scope[filtername].push(conf[conf_attr_name]);
 				}
 			}
 		});

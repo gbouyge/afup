@@ -11,8 +11,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="searchSalle"> Salles : </label>
                 <div class="col-sm-9">
-                    <select id="searchSalle" ng-model="search.salle">
-                        <option ng-repeat="salle in salles">{{salle}}</option>
+                    <select id="searchSalle" ng-model="search.salle" ng-options="conf.salle as conf.salle for conf in confs | orderBy:'salle' | unique:'salle'">
                         <option value="">Toutes</option>
                     </select>
                 </div>
@@ -20,8 +19,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="searchLang"> Langue : </label>
                 <div class="col-sm-9">
-                    <select id="searchLang" ng-model="search.lang">
-                        <option ng-repeat="lang in languages">{{lang}}</option>
+                    <select id="searchLang" ng-model="search.lang" ng-options="conf.lang as conf.lang for conf in confs | orderBy:'lang' | unique:'lang'">
                         <option value="">Toutes</option>
                     </select>
                 </div>
