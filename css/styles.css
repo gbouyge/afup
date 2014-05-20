@@ -51,6 +51,10 @@ body {
    padding-top: 10px; 
 }
 
+.search input {
+    height: 28px;
+}
+
 #search-full {
     background-color: #F5F5F5;
     border-color: #DDDDDD;
@@ -62,5 +66,6 @@ body {
     width: 100%;
     padding: 19px;
 }
+
 
 
