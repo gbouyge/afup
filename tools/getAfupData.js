@@ -80,10 +80,12 @@ casper.then(function() {
 				return date;
 			}
 
-			function conferencier(name, id) {
-				this.name = sanitize(name);
-				this.id = id
-			}
+				function conferencier(name, image, link) {
+					this.name = sanitize(name);
+					this.img = image;
+					this.link = 'http://afup.org/pages/phptourlyon2014/' + link;
+				}
+
 			function conference(id,name,date,horaire,salle,detail,conferenciers) {
 				var img_pattern = /<img.+?src=[\"'](.+?)[\"'].*?>/;
 				this.id = id;
@@ -109,10 +111,11 @@ casper.then(function() {
 				conferenciers = $(self).find(".conferencier");
 				
 				$(conferenciers).each(function(i,self) {
+					var img_pattern = /<img.+?src=[\"'](.+?)[\"'].*?>/;
 					conferencier_nom = $(self).text();
-					conferencier_link = $(self).find("a").attr("href").split('#');
-					conferencier_id = conferencier_link[1];
-					conf_conferenciers.push(new conferencier(conferencier_nom,conferencier_id));
+					conferencier_image = ($(self).html()).match(img_pattern)[1];
+					conferencier_link = $(self).find("a").attr("href");
+					conf_conferenciers.push(new conferencier(conferencier_nom,conferencier_image,conferencier_link));
 				});
 				
 				conf = new conference(id,name,date,horaire,salle,detail,conf_conferenciers)
