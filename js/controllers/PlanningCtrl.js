@@ -9,7 +9,9 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
     $scope.moduleState = 'session';
 
 	//Liste des filtres
-	$scope.filters = {"languages":"lang","salles":"salle"};
+	$scope.filters = {"languages":"lang","salles":"salle","conferenciers":"conferenciers"};
+
+    $scope.selectedConferencier = null;
 
 	//Chargement des conférences
   	$http.get('data/data.json').success(function(data) {
@@ -22,14 +24,21 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
 		}
 
 		//Remplissage des filtres
-		angular.forEach($scope.confs, function(conf, key){
-			for(var filtername in $scope.filters){
-				conf_attr_name = $scope.filters[filtername];
-				if (!inArray(conf[conf_attr_name],$scope[filtername])) {
-					$scope[filtername].push(conf[conf_attr_name]);
-				}
-			}
-		});
+        angular.forEach($scope.confs, function(conf, key){
+            for(var filtername in $scope.filters){
+                conf_attr_name = $scope.filters[filtername];
+                if (!in_array_r(conf[conf_attr_name],$scope[filtername])) {
+                    if (conf_attr_name == 'conferenciers') { 
+                        var conferenciers = conf['conferenciers'];
+                        for(var key in conferenciers){ 
+                            $scope[filtername].push(conferenciers[key]); 
+                        }
+                    } else {
+                        $scope[filtername].push(conf[conf_attr_name]);
+                    }
+                }
+            }
+        });
 	});
 
     $scope.buildAfupUrl = function(id, type) {
@@ -56,6 +65,25 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
 
         $scope.title = "PHP Tour 2014 :  " + $scope.viewTitle[moduleState];
     };
+
+    $scope.conferencierFilter = function(conf)
+    {
+        // console.log(conferencier);
+        // console.log($scope.selectedConferencier);
+        console.log($scope.selectedConferencier);
+        if (conf.conferenciers[0].id == 914) {return true}; return false;
+    }
+
+    $scope.setSelectedConferencier = function () {
+        // console.log(this.selectedConferencier);
+        // var id = this.company.id;
+        // if (_.contains($scope.selectedCompany, id)) {
+        //     $scope.selectedCompany = _.without($scope.selectedCompany, id);
+        // } else {
+        //     $scope.selectedCompany.push(id);
+        // }
+        // return false;
+    };
 }]);
 
 
@@ -66,3 +94,36 @@ function inArray(needle, haystack) {
     }
     return false;
 }
+
+function in_array_r(needle, haystack) {
+    var length = haystack.length;
+    for(var key in haystack) {
+        if(haystack[key] == needle){
+            return true;
+        }
+        if(typeof haystack[key]=='object'){
+            if(in_array_r(needle, haystack[key])){
+                return true;
+            }
+        } 
+    }
+    return false;
+}
+
+angular.module('App.filters', []).filter('conferencierFilter', [function () {
+    return function (confs, selectedConferencier) {
+        var resutl = [];
+        
+        if (selectedConferencier != null) {
+            angular.forEach(confs, function (conf) {
+                for (key in conf.conferenciers) {
+                    var conferencier = conf.conferenciers[key];
+                    if (conferencier.name == selectedConferencier) {resutl.push(conf)};
+                };
+            });
+            return resutl;
+        } else {
+            return confs;
+        }
+    };
+}]);
