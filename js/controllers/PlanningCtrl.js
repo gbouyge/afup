@@ -66,24 +66,6 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
         $scope.title = "PHP Tour 2014 :  " + $scope.viewTitle[moduleState];
     };
 
-    $scope.conferencierFilter = function(conf)
-    {
-        // console.log(conferencier);
-        // console.log($scope.selectedConferencier);
-        console.log($scope.selectedConferencier);
-        if (conf.conferenciers[0].id == 914) {return true}; return false;
-    }
-
-    $scope.setSelectedConferencier = function () {
-        // console.log(this.selectedConferencier);
-        // var id = this.company.id;
-        // if (_.contains($scope.selectedCompany, id)) {
-        //     $scope.selectedCompany = _.without($scope.selectedCompany, id);
-        // } else {
-        //     $scope.selectedCompany.push(id);
-        // }
-        // return false;
-    };
 }]);
 
 
