@@ -1,9 +1,8 @@
 angular.module('planningPHPTourFilters', []).filter('conferencierFilter', [function () {
-// angular.module('App.filters', []).filter('conferencierFilter', [function () {
     return function (confs, selectedConferencier) {
-        var resutl = [];
         // Si un conférencié est sélectionné
         if (selectedConferencier != null) {
+            var resutl = [];
             angular.forEach(confs, function (conf) {
                 for (key in conf.conferenciers) {
                     var conferencier = conf.conferenciers[key];
