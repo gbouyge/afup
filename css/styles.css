@@ -27,24 +27,10 @@ body {
 
 .print {
 	width: 100%;
-	margin-bottom: 15px;
-}
-
-#search {
-    padding: 5px;
-}
-
-#search form label {
-    color: #fff;
 }
 
 #search form input {
     padding: 0;
-}
-
-#search form select {
-    height: 22px;
-    min-width: 152px;
 }
 
 .search {
@@ -55,7 +41,7 @@ body {
     height: 28px;
 }
 
-#search-full {
+#search {
     background-color: #F5F5F5;
     border-color: #DDDDDD;
     border-radius: 4px 4px 0 0;
@@ -63,8 +49,13 @@ body {
     box-shadow: none;
     margin-left: 0;
     margin-right: 0;
+    margin-bottom:10px;
     width: 100%;
     padding: 19px;
+}
+
+#search form {
+    padding-bottom: 10px;
 }
 
 

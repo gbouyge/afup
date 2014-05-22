@@ -5,9 +5,6 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
     //Titre des vues
     $scope.viewTitle = {"session":"Sessions", "calendar":"Agenda", "split":"Split View"}
 
-    //Vue courante
-    $scope.moduleState = 'session';
-
 	//Liste des filtres
 	$scope.filters = {"languages":"lang","salles":"salle","conferenciers":"conferenciers"};
 
@@ -55,17 +52,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
             return '';
         }
     };
-
-    $scope.changeModuleState = function(e, moduleState)
-    {
-        $scope.moduleState = moduleState;
-        angular.element( '.nav .active' ).removeClass('active');
-        var li = angular.element(e.target).parent('li');
-        li.addClass('active');
-
-        $scope.title = "PHP Tour 2014 :  " + $scope.viewTitle[moduleState];
-    };
-
+    
 }]);
 
 
