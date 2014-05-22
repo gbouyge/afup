@@ -6,7 +6,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
     $scope.viewTitle = {"session":"Sessions", "calendar":"Agenda", "split":"Split View"}
 
 	//Liste des filtres
-	$scope.filters = {"languages":"lang","salles":"salle","conferenciers":"conferenciers"};
+	$scope.filters = {"conferenciers":"conferenciers"};
 
     $scope.selectedConferencier = null;
 
@@ -37,22 +37,6 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
             }
         });
 	});
-
-    $scope.buildAfupUrl = function(id, type) {
-        var base = 'http://afup.org/pages/phptourlyon2014/conferenciers.php#'
-        var suffixe = '';
-        if (type == 'img') {
-            base = 'http://afup.org/templates/phptourlyon2014/images/intervenants/';
-            suffixe = '.jpg';
-        }
-
-        if (id != '') {
-            return base + id + suffixe;
-        } else {
-            return '';
-        }
-    };
-    
 }]);
 
 

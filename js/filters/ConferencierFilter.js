@@ -1,18 +1,20 @@
-angular.module('planningPHPTourApp.filters', []).filter('myconferencierFilter', [function () {
-    return function (conferenciers, selectedConferencier) {
-        console.log('coucou');
-        // if (!angular.isUndefined(clients) && !angular.isUndefined(selectedCompany) && selectedCompany.length > 0) {
-        //     var tempClients = [];
-        //     angular.forEach(selectedCompany, function (id) {
-        //         angular.forEach(clients, function (client) {
-        //             if (angular.equals(client.company.id, id)) {
-        //                 tempClients.push(client);
-        //             }
-        //         });
-        //     });
-        //     return tempClients;
-        // } else {
-        //     return clients;
-        // }
+angular.module('planningPHPTourFilters', []).filter('conferencierFilter', [function () {
+// angular.module('App.filters', []).filter('conferencierFilter', [function () {
+    return function (confs, selectedConferencier) {
+        var resutl = [];
+        // Si un conférencié est sélectionné
+        if (selectedConferencier != null) {
+            angular.forEach(confs, function (conf) {
+                for (key in conf.conferenciers) {
+                    var conferencier = conf.conferenciers[key];
+                    // On ajoute au résultat le nom du conférencié sélectionné
+                    if (conferencier.name == selectedConferencier) {resutl.push(conf)};
+                };
+            });
+            return resutl;
+        } else {
+            // Sinon on retourne tous les conférenciers
+            return confs;
+        }
     };
 }]);
