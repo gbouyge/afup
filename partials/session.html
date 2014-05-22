@@ -1,0 +1,25 @@
+<div class="col-sm-12">
+    <h4>{{conf.name}}</h4>
+</div>
+<div class="col-sm-12">
+    <div class="col-xs-12 col-sm-9">
+        <p>{{conf.date}}</p>
+        <p>
+            <span class="label label-info">{{conf.salle}}</span>
+            <span class="label label-primary">{{conf.lang}}</span>
+        </p>
+        <p>
+           {{conf.detail}}
+        </p>
+    </div>
+<div class="col-xs-12 col-sm-3 text-center">
+      <div ng-repeat="conferencier in conf.conferenciers" class="conferencier">
+        <a href="{{conferencier.link}}">
+            <p><img src="{{conferencier.img}}" alt="" class="img-thumbnail img-responsive"/></p>
+            <p>{{conferencier.name}}</p>
+        </a>
+    </div>
+</div>
+<div class="col-sm-12 text-center">
+  <button id="btnParticipate" type="button" class="btn btn-primary btn-sm addEvent" session="{{conf.id}}">Je participe !</button>
+</div>
