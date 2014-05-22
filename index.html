@@ -57,9 +57,8 @@
                     <div class="form-group">
                         <label class="control-label" for="searchConferencier"> Conferencier : </label>
                         <div>
-                            <select id="searchConferencier" ng-model="selectedConferencier">
-                                <option ng-repeat="conferencier in conferenciers">{{conferencier.name}}</option>
-                                <option value="all">Tous</option>
+                            <select id="searchConferencier" ng-model="selectedConferencier" ng-options="conferencier.name as conferencier.name for conferencier in conferenciers | orderBy:'name' | unique:'name'">
+                                <option value="">Tous</option>
                             </select>
                         </div>
                     </div>
