@@ -58,5 +58,13 @@ body {
     padding-bottom: 10px;
 }
 
+.savedEvent{
+    background-color:#33CC66;
+}
+
+.conflictEvent{
+    background-color:#FF4848;
+}
+
 
 

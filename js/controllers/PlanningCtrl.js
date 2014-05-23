@@ -1,4 +1,4 @@
-planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope, $http) {
+planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', 'fullCalendarService',function($scope, $http, $rootScope, fullCalendarService) {
  	//Titre de la page
  	$scope.title = "PHP Tour 2014 : Sessions";
 
@@ -31,14 +31,45 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
 	});
 
     $scope.toggleSession = function(conf, $event){        
+        var addClass = 'savedEvent';
+
         if(conf.id in $scope.selectedConf) {
+            var conflitId = $scope.checkConflict(conf);
+            if (conflitId) {
+                console.log(conflitId);
+                var conflitedConf = $scope.selectedConf[conflitId];
+                fullCalendarService.changeClassEvent(conflitedConf.id, 'savedEvent');
+            }
+
             $scope.selectedConf.splice(conf.id,1);
+            addClass = '';
             toggleButton(angular.element($event.target), 'add');
         } else {
+            if($scope.checkConflict(conf)) {
+                addClass = 'conflictEvent';        
+            }
+
             $scope.selectedConf[conf.id] = conf;
             toggleButton(angular.element($event.target), 'remove');
         }
+
+        fullCalendarService.changeClassEvent(conf.id, addClass);
     };
+
+    $scope.checkConflict = function(newConf){
+        var overlap   = false;
+        var id        = newConf.id;
+        var dateStart = newConf.date_start;
+        var dateEnd   = newConf.date_end;
+        
+        angular.forEach($scope.selectedConf, function(conf, key){
+            if ((id != conf.id) && checkDatesRangeOverlap(dateStart,dateEnd,conf.date_start,conf.date_end)) {
+                overlap = conf.id;
+            }
+        });
+
+        return overlap;
+    }
 
     //A supprimer
     $scope.dumpSelectedConf = function(){
@@ -67,4 +98,8 @@ function toggleButton(el, state)
     el.removeClass(removeClass)
     el.addClass(addClass)
     el.html(text);
+}
+
+function checkDatesRangeOverlap(startA,endA,startB,endB) {
+    return (new Date(startA).getTime() <= new Date(endB).getTime()) && (new Date(endA).getTime() >= new Date(startB).getTime());
 }

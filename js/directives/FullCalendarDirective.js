@@ -30,7 +30,13 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 axisFormat: 'HH:mm',
                 dayNames: ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
                 dayNamesShort: ['Lun','Mar','Mer','Jeu','Thu','Ven','Sam','Dim'],
-                monthNames : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+                monthNames : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                eventRender: function(event, element) {
+                   //console.log(element);
+                    /*element.qtip({
+                        content: event.title
+                    });*/
+                }
             };
 
             var makeEvent = function(conf) {
