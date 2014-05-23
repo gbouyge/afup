@@ -1,7 +1,0 @@
-<div class="col-md-7 agenda">
-    <div id="calendar"></div>
-</div>
-<div class="col-md-5 session">
-    <button id="btnPrint" type="button" class="btn btn-primary btn-sm print" id="print">Imprimer mon calendrier</button>
-    <div class="well profile" ng-repeat="conf in confs | filter:search | orderBy:conf.date_start" ng-include="'partials/session.html'"></div>
-</div>

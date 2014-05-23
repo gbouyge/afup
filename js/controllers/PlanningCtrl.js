@@ -70,6 +70,10 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         return overlap;
     }
 
+    $scope.top = function() {
+        location.hash = "#top";
+    }
+
     //A supprimer
     $scope.dumpSelectedConf = function(){
         console.log('selectedConf');
