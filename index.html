@@ -8,7 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="css/yeti.min.css" rel="stylesheet">
-    <link href="vendors/fullcalendar/fullcalendar.css" rel="stylesheet">
+    <link href="vendor/fullcalendar/fullcalendar.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="css/styles.css" rel="stylesheet">
@@ -42,7 +42,7 @@
 
     <div class="container-fluid">
         <div class="col-md-7 agenda">
-            <div id="calendar"></div>
+            <fullcalendar ng-model="confs"></fullcalendar>
         </div>
         <div class="col-md-5 session">
             <div id="search">
@@ -73,7 +73,7 @@
                     <div class="form-group">
                         <label class="control-label" for="searchLang"> Langue : </label>
                         <div>
-                            <select id="searchLang" ng-model="searchLang" ng-options="conf.lang for conf in confs | orderBy:'lang' | unique:'lang'">
+                            <select id="searchLang" ng-model="searchLang" ng-options="conf.lang as conf.lang for conf in confs | orderBy:'lang' | unique:'lang'">
                                 <option selected value="">Toutes</option>
                             </select>
                         </div>
@@ -82,7 +82,7 @@
 
                 <button id="btnPrint" type="button" class="btn btn-primary btn-sm print" id="print">Imprimer mon calendrier</button>
             </div>
-            <div class="well profile" ng-repeat="conf in confs | filter:searchSalle | filter:searchLang | filter:search | conferencierFilter:selectedConferencier | orderBy:conf.date_start" ng-include="'partials/session.html'"></div>
+            <div class="well profile" ng-repeat="conf in confs | filter:searchLang | filter:searchSalle | filter:search | conferencierFilter:selectedConferencier | orderBy:conf.date_start" ng-include="'partials/session.html'"></div>
         </div>
     </div><!-- /.container -->
 
@@ -94,13 +94,13 @@
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-ui-utils/ui-utils.js"></script>
     <!-- fullcalendar -->
-    <script src="vendors/fullcalendar/fullcalendar.js"></script>
+    <script src="vendor/fullcalendar/fullcalendar.js"></script>
     <!-- moment -->
     <script src="vendors/momentjs/moment.js"></script>
     <!-- app -->    
     <script src="js/app.js"></script>
     <script src="js/filters/ConferencierFilter.js"></script>
     <script src="js/controllers/PlanningCtrl.js"></script>
-
+    <script src="js/directives/FullCalendarDirective.js"></script>
 </body>
 </html>

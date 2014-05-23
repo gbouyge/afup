@@ -30,15 +30,24 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', function($scope
         });
 	});
 
-    $scope.toggleSession = function(conf, $event){
-        
-        $scope.selectedConf.push(conf);
-        console.log($scope.selectedConf);
-        var el = $event.target;        
-        toggleButton(angular.element(el), 'add');
+    $scope.toggleSession = function(conf, $event){        
+        if(conf.id in $scope.selectedConf) {
+            $scope.selectedConf.splice(conf.id,1);
+            toggleButton(angular.element($event.target), 'add');
+        } else {
+            $scope.selectedConf[conf.id] = conf;
+            toggleButton(angular.element($event.target), 'remove');
+        }
+    };
 
+    //A supprimer
+    $scope.dumpSelectedConf = function(){
+        console.log('selectedConf');
+        angular.forEach($scope.selectedConf, function(conf,key) {
+            console.log(conf);
+        });
+    };
 
-    }
 }]);
 
 
@@ -48,7 +57,7 @@ function toggleButton(el, state)
     var removeClass = 'btn-danger';
     var text = 'Je participe !';
 
-    if(state == 'add') {
+    if(state != 'add') {
         var tmpClass = addClass;
         addClass = removeClass;
         removeClass = tmpClass;
