@@ -14,6 +14,7 @@
 - Highlight qui correspond au filtre
 - Sauvegarde de la config dans le localstorage (voir la compatibilité avec les navigateurs desktop / mobile)
 - Export Ical
+
 ##Installation
 
 ### Bower
