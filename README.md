@@ -3,6 +3,7 @@
 ##Présentation
 
 ##Reste à faire
+- Correction bug filtre langue
 - Rendu des Events dans le Calendrier
 - System Affichage / Masquage de colonne
 - Finalisation du style (couleur de sélection, bordure de sélection, ...)
