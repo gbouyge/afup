@@ -36,12 +36,11 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         if(conf.id in $scope.selectedConf) {
             var conflitId = $scope.checkConflict(conf);
             if (conflitId) {
-                console.log(conflitId);
                 var conflitedConf = $scope.selectedConf[conflitId];
                 fullCalendarService.changeClassEvent(conflitedConf.id, 'savedEvent');
             }
 
-            $scope.selectedConf.splice(conf.id,1);
+            delete($scope.selectedConf[conf.id]);
             addClass = '';
             toggleButton(angular.element($event.target), 'add');
         } else {
@@ -75,13 +74,14 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
     $scope.dumpSelectedConf = function(){
         console.log('selectedConf');
         angular.forEach($scope.selectedConf, function(conf,key) {
+            console.log(key);
             console.log(conf);
         });
     };
 
 }]);
 
-
+//A voir si on les intègre au ctrl
 function toggleButton(el, state)
 {
     var addClass = 'btn-primary';

@@ -31,11 +31,15 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 dayNames: ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
                 dayNamesShort: ['Lun','Mar','Mer','Jeu','Thu','Ven','Sam','Dim'],
                 monthNames : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                eventClick: function(event, jsEvent, view) {
+                    location.hash = "#" + event.id;
+                    angular.element(".profile").removeClass('calendarSelect');
+                    angular.element("#" + event.id).parent().addClass('calendarSelect');
+                },
                 eventRender: function(event, element) {
-                   //console.log(element);
-                    /*element.qtip({
-                        content: event.title
-                    });*/
+                },
+                viewDisplay: function(calendarView) {
+                    calendarView.setHeight(9999);
                 }
             };
 
