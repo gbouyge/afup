@@ -22,14 +22,15 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 firstHour:9,
                 minTime:9,
                 maxTime:18,
+                slotEventOverlap: false,
                 h: 2500,
-                timeFormat: 'H(:mm)',
+                timeFormat: 'H:mm',
                 columnFormat: {
                     week: 'dddd dd MMMM'
                 },
                 axisFormat: 'HH:mm',
-                dayNames: ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
-                dayNamesShort: ['Lun','Mar','Mer','Jeu','Thu','Ven','Sam','Dim'],
+                dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+                dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Thu','Ven','Sam'],
                 monthNames : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
                 eventClick: function(event, jsEvent, view) {
                     location.hash = "#" + event.id;
@@ -45,8 +46,8 @@ planningPHPTourApp.directive('fullcalendar', function() {
 
             var makeEvent = function(conf) {
                 var newEvent = new Object();
-                var eventDateStart = conf.date_start;
-                var eventDateEnd = conf.date_end;
+                var eventDateStart = conf.date_start.replace("Z", "");
+                var eventDateEnd = conf.date_end.replace("Z", "");
 
                 newEvent.id = conf.id;
                 newEvent.className = '';
@@ -54,6 +55,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 newEvent.start = new Date(eventDateStart);
                 newEvent.end = new Date(eventDateEnd);
                 newEvent.allDay = false;
+                newEvent.eventBorderColor = 'black';
 
                 return newEvent;
             };

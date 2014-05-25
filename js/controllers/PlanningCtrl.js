@@ -1,6 +1,6 @@
 planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', 'fullCalendarService',function($scope, $http, $rootScope, fullCalendarService) {
  	//Titre de la page
- 	$scope.title = "PHP Tour 2014 : Sessions";
+ 	$scope.title = "PHP Tour 2014";
 
     //Titre des vues
     $scope.viewTitle = {"session":"Sessions", "calendar":"Agenda", "split":"Split View"}
@@ -55,6 +55,18 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         fullCalendarService.changeClassEvent(conf.id, addClass);
     };
 
+    $scope.highlightSessions = function(filtredConf){
+        var filtred = true;
+        if (filtredConf == null) {
+            filtredConf = $scope.confs;
+            filtred = false;
+        }
+
+        angular.forEach(filtredConf, function(selectedConf, key){
+            fullCalendarService.filtredEvent(selectedConf.id, filtred);
+        });
+    }
+
     $scope.checkConflict = function(newConf){
         var overlap   = false;
         var id        = newConf.id;
@@ -71,7 +83,32 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
     }
 
     $scope.top = function() {
-        location.hash = "#top";
+        location.hash = "#search";
+    }
+
+    $scope.changeView = function() {
+        var session = angular.element('.session');
+        var agenda = angular.element('.agenda');
+        var icon = angular.element('.agenda h2 span');
+
+        var hiddenClass = 'hidden';
+        var fullSizeClass = 'col-md-12';
+        var normalSizeClass = 'col-md-7';
+
+        var leftIcon = 'glyphicon-arrow-left';
+        var rightIcon = 'glyphicon-arrow-right';
+
+        if (session.hasClass(hiddenClass)) {
+            session.removeClass(hiddenClass);
+            agenda.removeClass(fullSizeClass).addClass(normalSizeClass);
+            icon.removeClass(leftIcon).addClass(rightIcon);
+        } else {
+            session.addClass(hiddenClass);
+            agenda.removeClass(normalSizeClass).addClass(fullSizeClass);
+            icon.removeClass(rightIcon).addClass(leftIcon);
+        }
+
+        fullCalendarService.rerenderCalendar();
     }
 
     //A supprimer

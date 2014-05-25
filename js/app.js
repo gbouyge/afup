@@ -1,1 +1,1 @@
-var planningPHPTourApp = angular.module('planningPHPTourApp',['ui.utils', 'planningPHPTourFilters']);
+var planningPHPTourApp = angular.module('planningPHPTourApp',['ui.utils']);

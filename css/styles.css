@@ -1,24 +1,36 @@
-body {
-    padding-top: 50px;
-    /*background-color: #272B30;*/
+html, body {
+    height: 100%;
+}
+
+.container-fluid {
+    padding-left:0px;
+    padding-right:0px;   
+}
+
+.fill { 
+    min-height: 100%;
+    height: 100%;
 }
 
 .agenda {
 	padding-top: 10px;
 }
 
-#calendar {
-	background-color: white;
+.agenda h2 {
+    margin-top: 0px;
 }
 
 .session {
 	padding-top: 10px;
+    overflow: auto;
 }
 
 .profile {
     min-height: 250px;
     display: inline-block;
     width:100%;
+    font-size: 13px;
+    padding: 5px;
 }
 
 .img-responsive {
@@ -66,11 +78,24 @@ body {
     background-color:#FF4848;
 }
 
+.filtredEvent{
+    border: 1px solid black;
+}
+
 .scroll-fix{
-    padding-top: 50px;
-    margin-top: -50px;
+    padding-top: 25px;
+    margin-top: -25px;
 }
 
 .calendarSelect{
     border: 1px solid black;
+}
+
+.fc-event-title {
+    font-size: 12px;
+}
+
+.icon-click {
+    cursor: pointer;
+    font-size: 20px;
 }

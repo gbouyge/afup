@@ -1,4 +1,4 @@
-angular.module('planningPHPTourFilters', []).filter('conferencierFilter', [function () {
+planningPHPTourApp.filter('conferencierFilter', [function () {
     return function (confs, selectedConferencier) {
         // Si un conférencié est sélectionné
         if (selectedConferencier != null) {

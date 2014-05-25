@@ -20,31 +20,13 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body id="top" ng-controller="planningCtrl">
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand">{{title}}</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#" ng-click="changeModuleState($event,'split')"><span class="glyphicon glyphicon-list-alt"></span> | <span class="glyphicon glyphicon-calendar"></span></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="col-md-7 agenda" data-spy="affix">
+<body ng-controller="planningCtrl">
+    <div class="container-fluid fill">
+        <div class="col-md-7 agenda fill">
+            <h2 class="text-center">{{title}}<span ng-click="changeView()" class="icon-click glyphicon glyphicon-arrow-right pull-right"></span></h2>
             <fullcalendar confs="confs"></fullcalendar>
         </div>
-        <div class="col-md-5 col-md-offset-7 session">
+        <div class="col-md-5 session fill">
             <div id="search">
                 <form class="form-inline" role="form">
                     <h4>Outil de recherche</h4>
@@ -73,16 +55,15 @@
                     <div class="form-group">
                         <label class="control-label" for="searchLang"> Langue : </label>
                         <div>
-                            <select id="searchLang" ng-model="searchLang" ng-options="conf.lang as conf.lang for conf in confs | orderBy:'lang' | unique:'lang'">
+                            <select id="searchLang" ng-model="selectedLang" ng-options="conf.lang as conf.lang for conf in confs | orderBy:'lang' | unique:'lang'">
                                 <option selected value="">Toutes</option>
                             </select>
                         </div>
                     </div>
                 </form>
-
                 <button id="btnPrint" type="button" class="btn btn-primary btn-sm print" id="print">Imprimer mon calendrier</button>
             </div>
-            <div class="well profile" ng-repeat="conf in confs | filter:searchLang | filter:searchSalle | filter:search | conferencierFilter:selectedConferencier | orderBy:conf.date_start" ng-include="'partials/session.html'"></div>
+            <div class="well profile" ng-repeat="conf in confs | langueFilter:selectedLang | filter:searchSalle | filter:search | conferencierFilter:selectedConferencier | orderBy:conf.date_start" ng-include="'partials/session.html'"></div>
         </div>
     </div><!-- /.container -->
 
@@ -100,6 +81,7 @@
     <!-- app -->    
     <script src="js/app.js"></script>
     <script src="js/filters/ConferencierFilter.js"></script>
+    <script src="js/filters/LangueFilter.js"></script>
     <script src="js/directives/FullCalendarDirective.js"></script>
     <script src="js/services/FullCalendarService.js"></script>
     <script src="js/controllers/PlanningCtrl.js"></script>    

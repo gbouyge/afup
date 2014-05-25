@@ -3,17 +3,14 @@
 ##Présentation
 
 ##Reste à faire
-- Correction bug filtre langue
-- Rendu des Events dans le Calendrier
-- System Affichage / Masquage de colonne
-- Finalisation du style (couleur de sélection, bordure de sélection, ...)
-- Trouver une solution efficace pour remplacer le Affix
-- Module d’impression
 - Filter pour recherche texte
-- Responsive
-- Highlight qui correspond au filtre
-- Sauvegarde de la config dans le localstorage (voir la compatibilité avec les navigateurs desktop / mobile)
+- Module d’impression
+- Finalisation du style (couleur de sélection, bordure de sélection, ...)
+- qtip
+- Highlight qui correspond au filtre (Intégré mais désactivé car trop lent a voir)
 - Export Ical
+- Responsive
+- Sauvegarde de la config dans le localstorage (voir la compatibilité avec les navigateurs desktop / mobile)
 
 ##Installation
 
