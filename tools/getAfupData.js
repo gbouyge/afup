@@ -62,7 +62,7 @@ casper.then(function() {
 			{
 				var filteredData = new String(stringToReplace);
 				filteredData = filteredData.trim();
-				filteredData = filteredData.replace(/^[a-zA-Z0-9������]*$/gi, '');
+				//filteredData = filteredData.replace(/^[a-zA-Z0-9äöüÄÖÜ]*$/gi, '');
 				filteredData = replaceAll('<[^>]*>', '',filteredData);
 				filteredData = replaceAll('\n', '',filteredData);
 				filteredData = replaceAll('\t', '',filteredData);
@@ -90,6 +90,9 @@ casper.then(function() {
 				var img_pattern = /<img.+?src=[\"'](.+?)[\"'].*?>/;
 				this.id = id;
 				this.name = sanitize(name);
+				// if(this.id == 983) {
+				// 	this.name = name;
+				// }
 				this.date = sanitize(date);
 				this.horaire = sanitize(horaire);
 				this.salle = sanitize(salle);
@@ -108,6 +111,7 @@ casper.then(function() {
 				salle = $(self).find(".salle").text();
 				detail = $(self).find(".abstract").html();
 				id = $(self).find("a").attr("name");
+
 				conferenciers = $(self).find(".conferencier");
 				
 				$(conferenciers).each(function(i,self) {
@@ -133,6 +137,6 @@ casper.run(function() {
 	var fs = require('fs');
 	jsondata = convert2Json(all_confs);
 	fs.write("../data/data.json", jsondata, 'w');
-	require('utils').dump(all_confs[1]);
+	require('utils').dump(all_confs[37]);
 	this.exit();
 });
