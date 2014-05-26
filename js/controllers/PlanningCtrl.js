@@ -5,9 +5,6 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
     //Titre des vues
     $scope.viewTitle = {"session":"Sessions", "calendar":"Agenda", "split":"Split View"}
 
-	//Liste des filtres
-	$scope.filters = {"conferenciers":"conferenciers"};
-
     //Conf selectionnées
     $scope.selectedConf = [];
 
@@ -16,10 +13,8 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
   		$scope.confs = data;
 		var conf_attr_name = "";
 
-		//Initialisation des filtres
-		for(var filtername in $scope.filters){
-			$scope[filtername] = [];
-		}
+		//Initialisation du filtre conférencier
+        $scope.conferenciers = [];
 
 		//Remplissage du filtre conférencier
         angular.forEach($scope.confs, function(conf, key){
