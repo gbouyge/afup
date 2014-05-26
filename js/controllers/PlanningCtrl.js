@@ -2,16 +2,13 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
  	//Titre de la page
  	$scope.title = "PHP Tour 2014";
 
-    //Titre des vues
-    $scope.viewTitle = {"session":"Sessions", "calendar":"Agenda", "split":"Split View"}
-
     //Conf selectionnées
     $scope.selectedConf = [];
 
 	//Chargement des conférences
   	$http.get('data/data.json').success(function(data) {
-  		$scope.confs = data;
-		var conf_attr_name = "";
+  		//Save Data
+        $scope.confs = data;
 
 		//Initialisation du filtre conférencier
         $scope.conferenciers = [];
