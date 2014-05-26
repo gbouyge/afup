@@ -14,7 +14,6 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 month: 5,
                 date: 23,
                 defaultView: "agendaWeek",
-                className: "defaultEvent",
                 weekends:false,
                 hiddenDays: [ 3, 4, 5 ],
                 editable: false,
@@ -51,7 +50,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 var eventDateEnd = conf.date_end.replace("Z", "");
 
                 newEvent.id = conf.id;
-                newEvent.className = '';
+                newEvent.className = 'defaultEvent';
                 newEvent.title = conf.name;
                 newEvent.start = new Date(eventDateStart);
                 newEvent.end = new Date(eventDateEnd);

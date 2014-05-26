@@ -112,7 +112,22 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
     }
 
     $scope.print = function() {
+        w = $('#calendar').css('width');
+        console.log(w);
+
+        // Préparation du calendrier pour l'impression
+        $('#calendar').css('width', '6.5in');
+        $('.fc-header').hide(); 
+        $('#calendar').fullCalendar('render');
+
         window.print();
+
+        // Remise à zéro de la CSS
+        window.setTimeout(function() {
+        $('.fc-header').show();
+        $('#calendar').css('width', w);
+        $('#calendar').fullCalendar('render');
+        }, 1000);
     }
 
     //A supprimer
