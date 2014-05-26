@@ -3,8 +3,6 @@
 ##Présentation
 
 ##Reste à faire
-- Filter pour recherche texte
-- Module d’impression
 - Finalisation du style (couleur de sélection, bordure de sélection, ...)
 - qtip
 - Highlight qui correspond au filtre (Intégré mais désactivé car trop lent a voir)
