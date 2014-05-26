@@ -1,20 +1,16 @@
 planningPHPTourApp.filter('langueFilter', [function () {
     return function (confs, selectedLang) {
         if (selectedLang != null) {
-            var resutl = [];
+            var result = [];
             
             angular.forEach(confs, function (conf) {
                 if (conf.lang == selectedLang) {
-                    resutl.push(conf);
+                    result.push(conf);
                 };
             });
 
-            //this.highlightSessions(resutl);
-
-            return resutl;
+            return result;
         } 
-
-        //this.highlightSessions(null);
 
         return confs;
     };

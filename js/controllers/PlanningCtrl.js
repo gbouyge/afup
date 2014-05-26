@@ -55,18 +55,6 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         fullCalendarService.changeClassEvent(conf.id, addClass);
     };
 
-    $scope.highlightSessions = function(filtredConf){
-        var filtred = true;
-        if (filtredConf == null) {
-            filtredConf = $scope.confs;
-            filtred = false;
-        }
-
-        angular.forEach(filtredConf, function(selectedConf, key){
-            fullCalendarService.filtredEvent(selectedConf.id, filtred);
-        });
-    }
-
     $scope.checkConflict = function(newConf){
         var overlap   = false;
         var id        = newConf.id;
