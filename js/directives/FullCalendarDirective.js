@@ -14,6 +14,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 month: 5,
                 date: 23,
                 defaultView: "agendaWeek",
+                className: "defaultEvent",
                 weekends:false,
                 hiddenDays: [ 3, 4, 5 ],
                 editable: false,

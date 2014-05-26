@@ -1,0 +1,11 @@
+.session {
+	display: none;
+}
+
+.agenda {
+	width: 100%;
+}
+
+.defaultEvent {
+	display: none;
+}

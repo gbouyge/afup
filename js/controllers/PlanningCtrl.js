@@ -111,6 +111,10 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         fullCalendarService.rerenderCalendar();
     }
 
+    $scope.print = function() {
+        window.print();
+    }
+
     //A supprimer
     $scope.dumpSelectedConf = function(){
         console.log('selectedConf');
