@@ -50,7 +50,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 var eventDateEnd = conf.date_end.replace("Z", "");
 
                 newEvent.id = conf.id;
-                newEvent.className = '';
+                newEvent.className = 'defaultEvent';
                 newEvent.title = conf.name;
                 newEvent.start = new Date(eventDateStart);
                 newEvent.end = new Date(eventDateEnd);

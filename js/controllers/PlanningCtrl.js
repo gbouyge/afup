@@ -33,7 +33,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
             }
 
             delete($scope.selectedConf[conf.id]);
-            addClass = '';
+            addClass = 'defaultEvent';
             toggleButton(angular.element($event.target), 'add');
         } else {
             if($scope.checkConflict(conf)) {
@@ -89,6 +89,24 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         }
 
         fullCalendarService.rerenderCalendar();
+    }
+
+    $scope.print = function() {
+        w = $('#calendar').css('width');
+
+        // Préparation du calendrier pour l'impression
+        $('#calendar').css('width', '6.5in');
+        $('.fc-header').hide(); 
+        $('#calendar').fullCalendar('render');
+
+        window.print();
+
+        // Remise à zéro de la CSS
+        window.setTimeout(function() {
+        $('.fc-header').show();
+        $('#calendar').css('width', w);
+        $('#calendar').fullCalendar('render');
+        }, 1000);
     }
 
     //A supprimer
