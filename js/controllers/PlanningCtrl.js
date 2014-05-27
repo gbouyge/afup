@@ -41,7 +41,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
             }
 
             delete($scope.selectedConf[conf.id]);
-            addClass = '';
+            addClass = 'defaultEvent';
             toggleButton(angular.element($event.target), 'add');
         } else {
             if($scope.checkConflict(conf)) {
@@ -113,7 +113,6 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
 
     $scope.print = function() {
         w = $('#calendar').css('width');
-        console.log(w);
 
         // Préparation du calendrier pour l'impression
         $('#calendar').css('width', '6.5in');
