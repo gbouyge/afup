@@ -69,6 +69,10 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 }); 
                 angular.element('#calendar').fullCalendar('addEventSource', calendarEvents ,'stick');               
             });
+
+            scope.$parent.$watch('hideSession', function() {
+                scope.$parent.refreshView();
+            }); 
         }
     }
 });

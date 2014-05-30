@@ -2,6 +2,14 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
  	//Titre de la page
  	$scope.title = "PHP Tour 2014";
 
+    //Configuration de la vue
+    $scope.hideSession = false;
+    $scope.changeViewIconLeft = 'glyphicon-arrow-left';
+    $scope.changeViewIconRight = 'glyphicon-arrow-right';
+    $scope.fullSizeCalendarClass = 'col-md-12';
+    $scope.normalSizeCalendarClass = 'col-md-7';
+    $scope.hiddenClass = 'hidden';
+
     //Conf selectionnées
     $scope.selectedConf = [];
 
@@ -24,7 +32,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
 
     $scope.toggleSession = function(conf){        
         var addClass = 'savedEvent';
-        
+
         if(conf.id in $scope.selectedConf) {
             var conflitId = $scope.checkConflict(conf);
             if (conflitId) {
@@ -65,27 +73,13 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
     }
 
     $scope.changeView = function() {
-        var session = angular.element('.session');
-        var agenda = angular.element('.agenda');
-        var icon = angular.element('.agenda h2 span');
+        $scope.$watch('hideSession', function() {
+            $scope.refreshView();
+        });
+        $scope.hideSession  = !$scope.hideSession;      
+    }
 
-        var hiddenClass = 'hidden';
-        var fullSizeClass = 'col-md-12';
-        var normalSizeClass = 'col-md-7';
-
-        var leftIcon = 'glyphicon-arrow-left';
-        var rightIcon = 'glyphicon-arrow-right';
-
-        if (session.hasClass(hiddenClass)) {
-            session.removeClass(hiddenClass);
-            agenda.removeClass(fullSizeClass).addClass(normalSizeClass);
-            icon.removeClass(leftIcon).addClass(rightIcon);
-        } else {
-            session.addClass(hiddenClass);
-            agenda.removeClass(normalSizeClass).addClass(fullSizeClass);
-            icon.removeClass(rightIcon).addClass(leftIcon);
-        }
-
+    $scope.refreshView = function() {
         fullCalendarService.rerenderCalendar();
     }
 
