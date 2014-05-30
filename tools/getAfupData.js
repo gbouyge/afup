@@ -73,9 +73,9 @@ casper.then(function() {
 			function getDate(dateString,isStart) {
 				var pattern = /(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}) - (\d{2}):(\d{2})/;
 				if(isStart)
-					date = new Date(dateString.replace(pattern,'$3-$2-$1T$4:$5:00'));
+					date = dateString.replace(pattern,'$3-$2-$1T$4:$5:00');
 				else
-					date = new Date(dateString.replace(pattern,'$3-$2-$1T$6:$7:00'));
+					date = dateString.replace(pattern,'$3-$2-$1T$6:$7:00');
 
 				return date;
 			}

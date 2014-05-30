@@ -140,5 +140,5 @@ function toggleButton(el, state)
 }
 
 function checkDatesRangeOverlap(startA,endA,startB,endB) {
-    return (new Date(startA).getTime() <= new Date(endB).getTime()) && (new Date(endA).getTime() >= new Date(startB).getTime());
+    return (new Date(startA).getTime() < new Date(endB).getTime()) && (new Date(endA).getTime() > new Date(startB).getTime());
 }

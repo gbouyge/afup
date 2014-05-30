@@ -46,14 +46,12 @@ planningPHPTourApp.directive('fullcalendar', function() {
 
             var makeEvent = function(conf) {
                 var newEvent = new Object();
-                var eventDateStart = conf.date_start.replace("Z", "");
-                var eventDateEnd = conf.date_end.replace("Z", "");
 
                 newEvent.id = conf.id;
                 newEvent.className = 'defaultEvent';
                 newEvent.title = conf.name;
-                newEvent.start = new Date(eventDateStart);
-                newEvent.end = new Date(eventDateEnd);
+                newEvent.start = new Date(conf.date_start);
+                newEvent.end = new Date(conf.date_end);
                 newEvent.allDay = false;
                 newEvent.eventBorderColor = 'black';
 
