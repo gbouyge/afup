@@ -22,9 +22,9 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         });
 	});
 
-    $scope.toggleSession = function(conf, $event){        
+    $scope.toggleSession = function(conf){        
         var addClass = 'savedEvent';
-
+        
         if(conf.id in $scope.selectedConf) {
             var conflitId = $scope.checkConflict(conf);
             if (conflitId) {
@@ -34,14 +34,12 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
 
             delete($scope.selectedConf[conf.id]);
             addClass = 'defaultEvent';
-            toggleButton(angular.element($event.target), 'add');
         } else {
             if($scope.checkConflict(conf)) {
                 addClass = 'conflictEvent';        
             }
 
             $scope.selectedConf[conf.id] = conf;
-            toggleButton(angular.element($event.target), 'remove');
         }
 
         fullCalendarService.changeClassEvent(conf.id, addClass);
@@ -120,25 +118,6 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
 
 }]);
 
-//A voir si on les intègre au ctrl
-function toggleButton(el, state)
-{
-    var addClass = 'btn-primary';
-    var removeClass = 'btn-danger';
-    var text = 'Je participe !';
-
-    if(state != 'add') {
-        var tmpClass = addClass;
-        addClass = removeClass;
-        removeClass = tmpClass;
-        text = 'Je ne participe plus.';
-    }
-
-    el.removeClass(removeClass)
-    el.addClass(addClass)
-    el.html(text);
-}
-
 function checkDatesRangeOverlap(startA,endA,startB,endB) {
-    return (new Date(startA).getTime() <= new Date(endB).getTime()) && (new Date(endA).getTime() >= new Date(startB).getTime());
+    return (new Date(startA).getTime() < new Date(endB).getTime()) && (new Date(endA).getTime() > new Date(startB).getTime());
 }
