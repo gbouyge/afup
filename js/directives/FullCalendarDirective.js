@@ -49,7 +49,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
 
                 newEvent.id = conf.id;
                 newEvent.className = 'defaultEvent';
-                newEvent.title = conf.name;
+                newEvent.title = conf.salle +' : '+ conf.name;
                 newEvent.start = $.fullCalendar.parseDate(conf.date_start);
                 newEvent.end = $.fullCalendar.parseDate(conf.date_end);
                 newEvent.allDay = false;
