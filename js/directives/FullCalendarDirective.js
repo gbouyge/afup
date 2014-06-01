@@ -24,7 +24,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 maxTime:18,
                 slotEventOverlap: false,
                 h: 2500,
-                timeFormat: 'H:mm',
+                timeFormat: 'HH:mm { - HH:mm}',
                 columnFormat: {
                     week: 'dddd dd MMMM'
                 },
