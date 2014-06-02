@@ -23,11 +23,14 @@
 </head>
 <body ng-controller="planningCtrl">
     <div class="container-fluid fill">
-        <div class="col-md-7 agenda fill">
-            <h2 class="text-center">{{title}}<span ng-click="changeView()" class="icon-click glyphicon glyphicon-arrow-right pull-right"></span></h2>
-            <fullcalendar confs="confs"></fullcalendar>
+        <div ng-class="hideSession ? fullSizeCalendarClass : normalSizeCalendarClass" class="agenda fill">
+            <h2 id="title" class="text-center">
+                {{title}}
+                <span id="toggleView" ng-class="hideSession ? changeViewIconLeft : changeViewIconRight" ng-click="changeView()" class="icon-click glyphicon pull-right"></span>
+            </h2>
+            <fullcalendar></fullcalendar>
         </div>
-        <div class="col-md-5 session fill">
+        <div ng-class= "{'hideSession': hiddenClass}" class="col-md-5 session fill">
             <div id="search">
                 <form class="form-inline" role="form">
                     <h4>Outil de recherche</h4>
@@ -77,14 +80,13 @@
     <script src="vendor/angular-ui-utils/ui-utils.js"></script>
     <!-- fullcalendar -->
     <script src="vendor/fullcalendar/fullcalendar.js"></script>
-    <!-- moment -->
-    <!-- <script src="vendor/momentjs/moment.js"></script> -->
     <!-- app -->    
     <script src="js/app.js"></script>
     <script src="js/filters/ConferencierFilter.js"></script>
     <script src="js/filters/LangueFilter.js"></script>
     <script src="js/filters/TextFilter.js"></script>
     <script src="js/directives/FullCalendarDirective.js"></script>
+    <script src="js/directives/SessionButtonDirective.js"></script>
     <script src="js/services/FullCalendarService.js"></script>
     <script src="js/controllers/PlanningCtrl.js"></script>    
 </body>

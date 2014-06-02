@@ -2,7 +2,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
     return {
         restrict: 'E',
         template: '<div id="calendar"></div>',
-        scope: { confs: '=confs' },
+        scope: true,
         link: function (scope, el, attrs) {
             var config = {
                 header: {
@@ -23,7 +23,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 minTime:9,
                 maxTime:18,
                 slotEventOverlap: false,
-                h: 2500,
+                h: 850,
                 timeFormat: 'HH:mm { - HH:mm}',
                 columnFormat: {
                     week: 'dddd dd MMMM'
@@ -41,32 +41,21 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 },
                 viewDisplay: function(calendarView) {
                     calendarView.setHeight(9999);
+                },
+                windowResize: function(view) {
+                    $('#calendar').fullCalendar('option', 'height', angular.element('.agenda')[0].offsetHeight);
                 }
-            };
-
-            var makeEvent = function(conf) {
-                var newEvent = new Object();
-
-                newEvent.id = conf.id;
-                newEvent.className = 'defaultEvent';
-                newEvent.title = conf.salle +' : '+ conf.name;
-                newEvent.start = $.fullCalendar.parseDate(conf.date_start);
-                newEvent.end = $.fullCalendar.parseDate(conf.date_end);
-                newEvent.allDay = false;
-                newEvent.eventBorderColor = 'black';
-
-                return newEvent;
             };
 
             angular.element('#calendar').fullCalendar(config);
             
-            var calendarEvents = [];
-            scope.$watch('confs', function(confs) {
-                angular.forEach(confs, function(conf, key) {
-                    calendarEvents.push(makeEvent(conf));
-                }); 
-                angular.element('#calendar').fullCalendar('addEventSource', calendarEvents ,'stick');               
+            scope.$parent.$watch('events', function(events) {
+                angular.element('#calendar').fullCalendar('addEventSource', scope.$parent.events ,'stick');
             });
+
+            scope.$parent.$watch('hideSession', function() {
+                scope.$parent.refreshView();
+            }); 
         }
     }
 });

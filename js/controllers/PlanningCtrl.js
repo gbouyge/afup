@@ -1,14 +1,27 @@
 planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', 'fullCalendarService',function($scope, $http, $rootScope, fullCalendarService) {
  	//Titre de la page
- 	$scope.title = "PHP Tour 2014";
+ 	$scope.title = "PHP Tour Lyon 2014";
+
+    //Configuration de la vue
+    $scope.hideSession = false;
+    $scope.changeViewIconLeft = 'glyphicon-arrow-left';
+    $scope.changeViewIconRight = 'glyphicon-arrow-right';
+    $scope.fullSizeCalendarClass = 'col-md-12';
+    $scope.normalSizeCalendarClass = 'col-md-7';
+    $scope.hiddenClass = 'hidden';
 
     //Conf selectionnées
     $scope.selectedConf = [];
+
+    $scope.events = [];
 
 	//Chargement des conférences
   	$http.get('data/data.json').success(function(data) {
   		//Save Data
         $scope.confs = data;
+
+        //Mave Event
+        $scope.events = fullCalendarService.getEventList($scope.confs);
 
 		//Initialisation du filtre conférencier
         $scope.conferenciers = [];
@@ -22,7 +35,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         });
 	});
 
-    $scope.toggleSession = function(conf, $event){        
+    $scope.toggleSession = function(conf){        
         var addClass = 'savedEvent';
 
         if(conf.id in $scope.selectedConf) {
@@ -34,14 +47,12 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
 
             delete($scope.selectedConf[conf.id]);
             addClass = 'defaultEvent';
-            toggleButton(angular.element($event.target), 'add');
         } else {
             if($scope.checkConflict(conf)) {
                 addClass = 'conflictEvent';        
             }
 
             $scope.selectedConf[conf.id] = conf;
-            toggleButton(angular.element($event.target), 'remove');
         }
 
         fullCalendarService.changeClassEvent(conf.id, addClass);
@@ -54,7 +65,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         var dateEnd   = newConf.date_end;
         
         angular.forEach($scope.selectedConf, function(conf, key){
-            if ((id != conf.id) && checkDatesRangeOverlap(dateStart,dateEnd,conf.date_start,conf.date_end)) {
+            if ((id != conf.id) && $scope.checkDatesRangeOverlap(dateStart,dateEnd,conf.date_start,conf.date_end)) {
                 overlap = conf.id;
             }
         });
@@ -63,31 +74,21 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
     }
 
     $scope.top = function() {
-        location.hash = "#search";
+        if(angular.element('body')[0].offsetWidth <= 992) {
+            location.hash = "#title";
+        } else {
+            location.hash = "#search";
+        }
     }
 
     $scope.changeView = function() {
-        var session = angular.element('.session');
-        var agenda = angular.element('.agenda');
-        var icon = angular.element('.agenda h2 span');
+        $scope.$watch('hideSession', function() {
+            $scope.refreshView();
+        });
+        $scope.hideSession  = !$scope.hideSession;      
+    }
 
-        var hiddenClass = 'hidden';
-        var fullSizeClass = 'col-md-12';
-        var normalSizeClass = 'col-md-7';
-
-        var leftIcon = 'glyphicon-arrow-left';
-        var rightIcon = 'glyphicon-arrow-right';
-
-        if (session.hasClass(hiddenClass)) {
-            session.removeClass(hiddenClass);
-            agenda.removeClass(fullSizeClass).addClass(normalSizeClass);
-            icon.removeClass(leftIcon).addClass(rightIcon);
-        } else {
-            session.addClass(hiddenClass);
-            agenda.removeClass(normalSizeClass).addClass(fullSizeClass);
-            icon.removeClass(rightIcon).addClass(leftIcon);
-        }
-
+    $scope.refreshView = function() {
         fullCalendarService.rerenderCalendar();
     }
 
@@ -118,27 +119,8 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         });
     };
 
-}]);
-
-//A voir si on les intègre au ctrl
-function toggleButton(el, state)
-{
-    var addClass = 'btn-primary';
-    var removeClass = 'btn-danger';
-    var text = 'Je participe !';
-
-    if(state != 'add') {
-        var tmpClass = addClass;
-        addClass = removeClass;
-        removeClass = tmpClass;
-        text = 'Je ne participe plus.';
+    $scope.checkDatesRangeOverlap = function(startA,endA,startB,endB) {
+        return (new Date(startA).getTime() < new Date(endB).getTime()) && (new Date(endA).getTime() > new Date(startB).getTime());
     }
 
-    el.removeClass(removeClass)
-    el.addClass(addClass)
-    el.html(text);
-}
-
-function checkDatesRangeOverlap(startA,endA,startB,endB) {
-    return (new Date(startA).getTime() < new Date(endB).getTime()) && (new Date(endA).getTime() > new Date(startB).getTime());
-}
+}]);

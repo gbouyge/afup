@@ -10,7 +10,6 @@
 - qtip
 - Highlight qui correspond au filtre (Intégré mais désactivé car trop lent a voir)
 - Export Ical
-- Responsive
 - Sauvegarde de la config dans le localstorage (voir la compatibilité avec les navigateurs desktop / mobile)
 
 ##Installation
