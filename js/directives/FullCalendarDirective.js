@@ -47,7 +47,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
                     $('#calendar').fullCalendar('option', 'height', angular.element('.agenda')[0].offsetHeight);
                 }
             };
-
+            
             angular.element('#calendar').fullCalendar(config);
             
             scope.$parent.$watch('events', function(events) {

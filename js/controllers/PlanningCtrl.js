@@ -124,4 +124,3 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
     }
 
 }]);
-
