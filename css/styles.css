@@ -7,13 +7,9 @@ html, body {
     padding-right:0px;   
 }
 
-.fill { 
-    min-height: 100%;
-    height: 100%;
-}
-
 .agenda {
 	padding-top: 10px;
+    height: 850px;
 }
 
 .agenda h2 {
@@ -22,7 +18,6 @@ html, body {
 
 .session {
 	padding-top: 10px;
-    overflow: auto;
 }
 
 .profile {
@@ -99,3 +94,48 @@ html, body {
     cursor: pointer;
     font-size: 20px;
 }
+
+#toggleView {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .agenda {
+        height: 870px;
+    }
+
+    .fill { 
+        min-height: 400px;
+        height: 870px;
+    }
+}
+@media (min-width: 992px) {
+    .fill { 
+        min-height: 100%;
+        height: 100%;
+    }
+
+    #toggleView {
+        display: block;
+    }
+    .session {
+        padding-top: 10px;
+        overflow: auto;
+    }
+}
+@media (min-width: 1200px) {
+    .fill { 
+        min-height: 100%;
+        height: 100%;
+    }
+
+    #toggleView {
+        display: block;
+    }
+
+    .session {
+        padding-top: 10px;
+        overflow: auto;
+    }
+}
+

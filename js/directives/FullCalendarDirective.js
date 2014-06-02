@@ -23,7 +23,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 minTime:9,
                 maxTime:18,
                 slotEventOverlap: false,
-                h: 2500,
+                h: 850,
                 timeFormat: 'HH:mm { - HH:mm}',
                 columnFormat: {
                     week: 'dddd dd MMMM'
@@ -41,6 +41,10 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 },
                 viewDisplay: function(calendarView) {
                     calendarView.setHeight(9999);
+                },
+                windowResize: function(view) {
+                    console.log(angular.element('.agenda')[0].offsetHeight);
+                    $('#calendar').fullCalendar('option', 'height', angular.element('.agenda')[0].offsetHeight);
                 }
             };
 

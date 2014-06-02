@@ -74,7 +74,11 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
     }
 
     $scope.top = function() {
-        location.hash = "#search";
+        if(angular.element('body')[0].offsetWidth <= 992) {
+            location.hash = "#title";
+        } else {
+            location.hash = "#search";
+        }
     }
 
     $scope.changeView = function() {

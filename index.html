@@ -24,9 +24,9 @@
 <body ng-controller="planningCtrl">
     <div class="container-fluid fill">
         <div ng-class="hideSession ? fullSizeCalendarClass : normalSizeCalendarClass" class="agenda fill">
-            <h2 class="text-center">
+            <h2 id="title" class="text-center">
                 {{title}}
-                <span ng-class="hideSession ? changeViewIconLeft : changeViewIconRight" ng-click="changeView()" class="icon-click glyphicon pull-right"></span>
+                <span id="toggleView" ng-class="hideSession ? changeViewIconLeft : changeViewIconRight" ng-click="changeView()" class="icon-click glyphicon pull-right"></span>
             </h2>
             <fullcalendar></fullcalendar>
         </div>
