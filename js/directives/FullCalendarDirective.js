@@ -43,11 +43,10 @@ planningPHPTourApp.directive('fullcalendar', function() {
                     calendarView.setHeight(9999);
                 },
                 windowResize: function(view) {
-                    console.log(angular.element('.agenda')[0].offsetHeight);
                     $('#calendar').fullCalendar('option', 'height', angular.element('.agenda')[0].offsetHeight);
                 }
             };
-            
+
             angular.element('#calendar').fullCalendar(config);
             
             scope.$parent.$watch('events', function(events) {
