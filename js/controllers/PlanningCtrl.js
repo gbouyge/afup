@@ -13,10 +13,15 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
     //Conf selectionnées
     $scope.selectedConf = [];
 
+    $scope.events = [];
+
 	//Chargement des conférences
   	$http.get('data/data.json').success(function(data) {
   		//Save Data
         $scope.confs = data;
+
+        //Mave Event
+        $scope.events = fullCalendarService.getEventList($scope.confs);
 
 		//Initialisation du filtre conférencier
         $scope.conferenciers = [];
@@ -60,7 +65,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         var dateEnd   = newConf.date_end;
         
         angular.forEach($scope.selectedConf, function(conf, key){
-            if ((id != conf.id) && checkDatesRangeOverlap(dateStart,dateEnd,conf.date_start,conf.date_end)) {
+            if ((id != conf.id) && $scope.checkDatesRangeOverlap(dateStart,dateEnd,conf.date_start,conf.date_end)) {
                 overlap = conf.id;
             }
         });
@@ -110,8 +115,9 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         });
     };
 
+    $scope.checkDatesRangeOverlap = function(startA,endA,startB,endB) {
+        return (new Date(startA).getTime() < new Date(endB).getTime()) && (new Date(endA).getTime() > new Date(startB).getTime());
+    }
+
 }]);
 
-function checkDatesRangeOverlap(startA,endA,startB,endB) {
-    return (new Date(startA).getTime() < new Date(endB).getTime()) && (new Date(endA).getTime() > new Date(startB).getTime());
-}

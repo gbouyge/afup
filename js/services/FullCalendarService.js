@@ -35,4 +35,35 @@ planningPHPTourApp.service('fullCalendarService', function(){
             calendar.fullCalendar('updateEvent', confEvent);
         }
     }
+
+    this.parseDate = function (dateString) {
+        return $.fullCalendar.parseDate(dateString);
+    }
+
+    this.getEventList = function (confs) {
+        var self = this;
+        var calendarEvents = [];
+
+        angular.forEach(confs, function(conf, key) {
+            calendarEvents.push(self.makeEvent(conf));
+        });
+
+        return calendarEvents;
+    }
+
+    this.makeEvent = function (conf) {
+        var newEvent = new Object();
+        var eventDateStart = conf.date_start.replace("Z", "");
+        var eventDateEnd = conf.date_end.replace("Z", "");
+
+        newEvent.id = conf.id;
+        newEvent.className = 'defaultEvent';
+        newEvent.title = conf.salle +' : '+ conf.name;
+        newEvent.start = this.parseDate(conf.date_start);
+        newEvent.end = this.parseDate(conf.date_end);
+        newEvent.allDay = false;
+        newEvent.eventBorderColor = 'black';
+
+        return newEvent;
+    }
 });

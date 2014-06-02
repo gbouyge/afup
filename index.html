@@ -28,7 +28,7 @@
                 {{title}}
                 <span ng-class="hideSession ? changeViewIconLeft : changeViewIconRight" ng-click="changeView()" class="icon-click glyphicon pull-right"></span>
             </h2>
-            <fullcalendar confs="confs"></fullcalendar>
+            <fullcalendar></fullcalendar>
         </div>
         <div ng-class= "{'hideSession': hiddenClass}" class="col-md-5 session fill">
             <div id="search">
@@ -80,8 +80,6 @@
     <script src="vendor/angular-ui-utils/ui-utils.js"></script>
     <!-- fullcalendar -->
     <script src="vendor/fullcalendar/fullcalendar.js"></script>
-    <!-- moment -->
-    <script src="vendors/momentjs/moment.js"></script>
     <!-- app -->    
     <script src="js/app.js"></script>
     <script src="js/filters/ConferencierFilter.js"></script>

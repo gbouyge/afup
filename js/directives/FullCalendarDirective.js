@@ -2,7 +2,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
     return {
         restrict: 'E',
         template: '<div id="calendar"></div>',
-        scope: { confs: '=confs' },
+        scope: true,
         link: function (scope, el, attrs) {
             var config = {
                 header: {
@@ -24,7 +24,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 maxTime:18,
                 slotEventOverlap: false,
                 h: 2500,
-                timeFormat: 'H:mm',
+                timeFormat: 'HH:mm { - HH:mm}',
                 columnFormat: {
                     week: 'dddd dd MMMM'
                 },
@@ -44,30 +44,10 @@ planningPHPTourApp.directive('fullcalendar', function() {
                 }
             };
 
-            var makeEvent = function(conf) {
-                var newEvent = new Object();
-                var eventDateStart = conf.date_start.replace("Z", "");
-                var eventDateEnd = conf.date_end.replace("Z", "");
-
-                newEvent.id = conf.id;
-                newEvent.className = 'defaultEvent';
-                newEvent.title = conf.name;
-                newEvent.start = new Date(eventDateStart);
-                newEvent.end = new Date(eventDateEnd);
-                newEvent.allDay = false;
-                newEvent.eventBorderColor = 'black';
-
-                return newEvent;
-            };
-
             angular.element('#calendar').fullCalendar(config);
             
-            var calendarEvents = [];
-            scope.$watch('confs', function(confs) {
-                angular.forEach(confs, function(conf, key) {
-                    calendarEvents.push(makeEvent(conf));
-                }); 
-                angular.element('#calendar').fullCalendar('addEventSource', calendarEvents ,'stick');               
+            scope.$parent.$watch('events', function(events) {
+                angular.element('#calendar').fullCalendar('addEventSource', scope.$parent.events ,'stick');
             });
 
             scope.$parent.$watch('hideSession', function() {
