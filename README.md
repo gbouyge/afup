@@ -12,6 +12,15 @@
 - Export Ical
 - Sauvegarde de la config dans le localstorage (voir la compatibilité avec les navigateurs desktop / mobile)
 
+##Installation via Docker
+
+> docker build -t="site/afup" .
+
+> docker run -d -p 8080:80 site/afup
+
+> http://localhost:8080/ 
+
+
 ##Installation
 
 ### Bower
