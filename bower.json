@@ -5,8 +5,7 @@
     "bootstrap": "~3.1.0",
     "angular": null,
     "angular-ui-utils":null,
-    "fullcalendar":null,
-    "momentjs":null
+    "fullcalendar":"1.6.4"
   },
   "private": true
 }
