@@ -14,11 +14,11 @@
 
 ##Installation via Docker
 
-> docker build -t="site/afup" .
+> docker build -t="site/planning-afup" .
 
-> docker run -d -p 8080:80 site/afup
+> docker run -d -p 8080:80 site/planning-afup
 
-> http://localhost:8080/ 
+> http://localhost:8080/
 
 
 ##Installation
