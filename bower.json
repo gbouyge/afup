@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "bootstrap": "~3.1.0",
-    "angular": null,
-    "angular-ui-utils":null,
-    "fullcalendar":null,
-    "momentjs":null
+    "angular": "1.2.16",
+    "angular-ui-utils":"0.1.1",
+    "fullcalendar":"1.6.4"
   },
   "private": true
 }
