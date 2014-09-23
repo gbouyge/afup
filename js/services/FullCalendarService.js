@@ -4,7 +4,7 @@ planningPHPTourApp.service('fullCalendarService', function(){
         var confEvent = calendar.fullCalendar('clientEvents', id)[0];
         var currentClass = confEvent.className;
         confEvent.className = className;
-        
+
         if (currentClass.lastIndexOf("filtredEvent") != -1) {
             confEvent.className += " filtredEvent";
         }
@@ -29,7 +29,7 @@ planningPHPTourApp.service('fullCalendarService', function(){
             if (isFiltred) {
                 confEvent.className += " filtredEvent";
             } else {
-                confEvent.className = confEvent.className.replace(" filtredEvent", ""); 
+                confEvent.className = confEvent.className.replace(" filtredEvent", "");
             }
 
             calendar.fullCalendar('updateEvent', confEvent);
@@ -53,8 +53,8 @@ planningPHPTourApp.service('fullCalendarService', function(){
 
     this.makeEvent = function (conf) {
         var newEvent = new Object();
-        var eventDateStart = conf.date_start.replace("Z", "");
-        var eventDateEnd = conf.date_end.replace("Z", "");
+        //var eventDateStart = conf.date_start.replace("Z", "");
+        //var eventDateEnd = conf.date_end.replace("Z", "");
 
         newEvent.id = conf.id;
         newEvent.className = 'defaultEvent';
@@ -63,7 +63,6 @@ planningPHPTourApp.service('fullCalendarService', function(){
         newEvent.end = this.parseDate(conf.date_end);
         newEvent.allDay = false;
         newEvent.eventBorderColor = 'black';
-
         return newEvent;
     }
 });

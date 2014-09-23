@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PHP Tour Planning</title>
+    <title>Forum PHP 2014</title>
 
     <!-- Bootstrap -->
     <link href="css/yeti.min.css" rel="stylesheet">
@@ -56,14 +56,14 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="control-label" for="searchLang"> Langue : </label>
                         <div>
                             <select id="searchLang" ng-model="selectedLang" ng-options="conf.lang as conf.lang for conf in confs | orderBy:'lang' | unique:'lang'">
                                 <option selected value="">Toutes</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                 </form>
                 <button id="btnPrint" type="button" class="btn btn-primary btn-sm print" id="print" ng-click="print()">Imprimer mon calendrier</button>
             </div>
@@ -80,7 +80,7 @@
     <script src="vendor/angular-ui-utils/ui-utils.js"></script>
     <!-- fullcalendar -->
     <script src="vendor/fullcalendar/fullcalendar.js"></script>
-    <!-- app -->    
+    <!-- app -->
     <script src="js/app.js"></script>
     <script src="js/filters/ConferencierFilter.js"></script>
     <script src="js/filters/LangueFilter.js"></script>
@@ -88,6 +88,6 @@
     <script src="js/directives/FullCalendarDirective.js"></script>
     <script src="js/directives/SessionButtonDirective.js"></script>
     <script src="js/services/FullCalendarService.js"></script>
-    <script src="js/controllers/PlanningCtrl.js"></script>    
+    <script src="js/controllers/PlanningCtrl.js"></script>
 </body>
 </html>
