@@ -24,10 +24,18 @@
 <body ng-controller="planningCtrl">
     <div class="container-fluid fill">
         <div ng-class="hideSession ? fullSizeCalendarClass : normalSizeCalendarClass" class="agenda fill">
-            <h2 id="title" class="text-center">
-                {{title}}
-                <span id="toggleView" ng-class="hideSession ? changeViewIconLeft : changeViewIconRight" ng-click="changeView()" class="icon-click glyphicon pull-right"></span>
-            </h2>
+	        <div class="header">
+		        <div class="logo-php">
+			        <img class="img-responsive" src="img/logo.png" alt="{{title}}"/>
+		        </div>
+	            <h2 id="title" class="text-center">
+	                {{title}}
+	            </h2>
+		        <div class="norsys">
+			        <span id="toggleView" ng-class="hideSession ? changeViewIconLeft : changeViewIconRight" ng-click="changeView()" class="icon-click glyphicon pull-right"></span>
+			        <img class="img-responsive" src="img/norsys.png" alt="norsys"/>
+		        </div>
+	        </div>
             <fullcalendar></fullcalendar>
         </div>
         <div ng-class= "{'hideSession': hiddenClass}" class="col-md-5 session fill">
