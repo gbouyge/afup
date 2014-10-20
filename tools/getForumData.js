@@ -92,7 +92,7 @@ casper.then(function() {
 				this.name = sanitize(name);
 				this.date = sanitize(date);
 				this.horaire = sanitize(horaire);
-				this.salle = sanitize(salle);
+				this.salle = sanitize(salle).replace('Auditorium Lucienne et André Blin', 'Aud.L.A.B.').replace('Grand Salon', 'G.S.');
 				this.detail = sanitize(detail);
 				this.conferenciers = conferenciers;
 				this.date_start = getDate(this.date,true);
