@@ -1,6 +1,6 @@
 planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', 'fullCalendarService',function($scope, $http, $rootScope, fullCalendarService) {
  	//Titre de la page
- 	$scope.title = "PHP Tour Lyon 2014";
+ 	$scope.title = "PHP Tour Luxembourg 2015";
 
     //Configuration de la vue
     $scope.hideSession = false;
@@ -35,7 +35,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         });
 	});
 
-    $scope.toggleSession = function(conf){        
+    $scope.toggleSession = function(conf){
         var addClass = 'savedEvent';
 
         if(conf.id in $scope.selectedConf) {
@@ -49,7 +49,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
             addClass = 'defaultEvent';
         } else {
             if($scope.checkConflict(conf)) {
-                addClass = 'conflictEvent';        
+                addClass = 'conflictEvent';
             }
 
             $scope.selectedConf[conf.id] = conf;
@@ -63,7 +63,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         var id        = newConf.id;
         var dateStart = newConf.date_start;
         var dateEnd   = newConf.date_end;
-        
+
         angular.forEach($scope.selectedConf, function(conf, key){
             if ((id != conf.id) && $scope.checkDatesRangeOverlap(dateStart,dateEnd,conf.date_start,conf.date_end)) {
                 overlap = conf.id;
@@ -85,7 +85,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         $scope.$watch('hideSession', function() {
             $scope.refreshView();
         });
-        $scope.hideSession  = !$scope.hideSession;      
+        $scope.hideSession  = !$scope.hideSession;
     }
 
     $scope.refreshView = function() {
@@ -97,7 +97,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
 
         // Préparation du calendrier pour l'impression
         $('#calendar').css('width', '6.5in');
-        $('.fc-header').hide(); 
+        $('.fc-header').hide();
         $('#calendar').fullCalendar('render');
 
         window.print();
