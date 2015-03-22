@@ -1,7 +1,7 @@
 //casperjs --ignore-ssl-errors=yes --web-security=no collector.js --collector=<<collector name>> [--log-level='debug']
 
-var casper = require('casper').create({   
-    verbose: true, 
+var casper = require('casper').create({
+    verbose: true,
 	/*logLevel: logLvl,*/
     pageSettings: {
         loadImages:  false,       // The WebPage instance used by Casper will
@@ -26,7 +26,7 @@ var casper = require('casper').create({
 
 var debug=true;
 
-casper.start("http://afup.org/pages/phptourlyon2014/sessions.php", function() {
+casper.start("http://afup.org/pages/phptourluxembourg2015/sessions.php", function() {
     this.capture('phptour.png');
 	this.page.injectJs('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
 });
@@ -38,20 +38,20 @@ function convert2Json(data) {
 		json_result += JSON.stringify(data[i]);
 		(i+1<data.length)? json_result += ",\r\n":null;
 	}
-	
+
 	return "["+json_result+"]";
 }
 
 var all_confs = new Array();
 var conf_conferenciers = [];
 var img_pattern = /<img.+?src=[\"'](.+?)[\"'].*?>/;
-casper.then(function() {	
+casper.then(function() {
 	sessions = this.getElementsInfo('.session');
 	var i=0;
 	all_confs = this.evaluate(function() {
 			var myTab = new Array();
 			var conf  = null;
-			
+
 			function replaceAll(wordToReplace,replace,data)
 			{
 				re = new RegExp(wordToReplace, 'g');
@@ -83,7 +83,7 @@ casper.then(function() {
 				function conferencier(name, image, link) {
 					this.name = sanitize(name);
 					this.img = image;
-					this.link = 'http://afup.org/pages/phptourlyon2014/' + link;
+					this.link = 'http://afup.org/pages/phptourluxemboug2015/' + link;
 				}
 
 			function conference(id,name,date,horaire,salle,detail,conferenciers) {
@@ -101,8 +101,8 @@ casper.then(function() {
 				this.date_start = getDate(this.date,true);
 				this.date_end = getDate(this.date,false);
 				this.lang = (detail.indexOf("picto-en") > -1)?"EN":"FR";
-			} 
-			
+			}
+
 			$( ".session" ).each(function( index,self ) {
 				var conf_conferenciers = new Array();
 				name = $(self).find("h3").text();
@@ -113,7 +113,7 @@ casper.then(function() {
 				id = $(self).find("a").attr("name");
 
 				conferenciers = $(self).find(".conferencier");
-				
+
 				$(conferenciers).each(function(i,self) {
 					var img_pattern = /<img.+?src=[\"'](.+?)[\"'].*?>/;
 					conferencier_nom = $(self).text();
@@ -121,18 +121,18 @@ casper.then(function() {
 					conferencier_link = $(self).find("a").attr("href");
 					conf_conferenciers.push(new conferencier(conferencier_nom,conferencier_image,conferencier_link));
 				});
-				
+
 				conf = new conference(id,name,date,horaire,salle,detail,conf_conferenciers)
 				myTab.push(conf);
 			});
-			
+
 			return myTab;
 		});
 
 });
 
 
-	
+
 casper.run(function() {
 	var fs = require('fs');
 	jsondata = convert2Json(all_confs);

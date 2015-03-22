@@ -10,12 +10,12 @@ planningPHPTourApp.directive('fullcalendar', function() {
                     center: '',
                     right: ''
                 },
-                year: 2014,
-                month: 5,
-                date: 23,
+                year: 2015,
+                month: 4,
+                date: 13,
                 defaultView: "agendaWeek",
                 weekends:false,
-                hiddenDays: [ 3, 4, 5 ],
+                hiddenDays: [ 1, 4, 5 ],
                 editable: false,
                 allDaySlot:false,
                 slotMinutes:15,
@@ -48,14 +48,14 @@ planningPHPTourApp.directive('fullcalendar', function() {
             };
 
             angular.element('#calendar').fullCalendar(config);
-            
+
             scope.$parent.$watch('events', function(events) {
                 angular.element('#calendar').fullCalendar('addEventSource', scope.$parent.events ,'stick');
             });
 
             scope.$parent.$watch('hideSession', function() {
                 scope.$parent.refreshView();
-            }); 
+            });
         }
     }
 });
