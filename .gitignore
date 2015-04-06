@@ -5,3 +5,6 @@ tools/npm-debug.log
 tools/phptour.png
 ### Data ###
 data
+### Useless files/directories ###
+.DS_Store
+.idea/
