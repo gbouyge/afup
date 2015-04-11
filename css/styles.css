@@ -1,7 +1,9 @@
 html, body {
     height: 100%;
 }
-
+a{
+    color: #3d64c1;
+}
 .container-fluid {
     padding-left:0px;
     padding-right:0px;   
@@ -139,3 +141,57 @@ html, body {
     }
 }
 
+/** header **/
+.header{
+    position: relative;
+    width: 100%;
+    float: left;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    display: block;
+    border-bottom: 2px solid #e7e7e7;
+}
+.logo-php{
+    width: 20%;
+    height: 70px;
+    float: left;
+}
+.logo-php img{
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+}
+h2#title{
+    width: 60%;
+    float: left;
+    padding: 15px 0;
+    font-size: 20px;
+}
+.norsys{
+    width: 20%;
+    height: 70px;
+    float: right;
+    position: relative;
+}
+.norsys img{
+    width: 100%;
+    max-width: 170px;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.fc-widget-header{
+    color: #fff;
+    background-color: #3d64c1;
+}
+.btn-primary{
+    background-color: #3d64c1;
+    border-color: #304f99;
+}
+.label-info{
+    background-color: #5284da;
+}
+.icon-click {
+    color: #3d64c1;
+}
