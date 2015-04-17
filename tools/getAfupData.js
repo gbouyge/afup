@@ -83,7 +83,7 @@ casper.then(function() {
 				function conferencier(name, image, link) {
 					this.name = sanitize(name);
 					this.img = image;
-					this.link = 'http://afup.org/pages/phptourluxemboug2015/' + link;
+					this.link = 'http://afup.org/pages/phptourluxembourg2015/' + link;
 				}
 
 			function conference(id,name,date,horaire,salle,detail,conferenciers) {
