@@ -2,7 +2,7 @@
 
 var casper = require('casper').create({
     verbose: true,
-	/*logLevel: logLvl,*/
+    logLevel: 'debug',
     pageSettings: {
         loadImages:  false,       // The WebPage instance used by Casper will
         loadPlugins: true,        // use these settings
@@ -26,9 +26,8 @@ var casper = require('casper').create({
 
 var debug=true;
 
-casper.start("http://afup.org/pages/phptourluxembourg2015/sessions.php", function() {
+casper.start("http://event.afup.org/php-tour-2016/programme/", function() {
     this.capture('phptour.png');
-	this.page.injectJs('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
 });
 
 function convert2Json(data) {
@@ -45,11 +44,18 @@ function convert2Json(data) {
 var all_confs = new Array();
 var conf_conferenciers = [];
 var img_pattern = /<img.+?src=[\"'](.+?)[\"'].*?>/;
+
+casper.on('remote.message', function(message) {
+    this.echo(message);
+});
+
 casper.then(function() {
-	sessions = this.getElementsInfo('.session');
+    sessions = this.getElementsInfo('.session');
 	var i=0;
-	all_confs = this.evaluate(function() {
-			var myTab = new Array();
+
+	all_confs = casper.evaluate(function() {
+            $ = jQuery;
+            var myTab = new Array();
 			var conf  = null;
 
 			function replaceAll(wordToReplace,replace,data)
@@ -71,19 +77,21 @@ casper.then(function() {
 			}
 
 			function getDate(dateString,isStart) {
-				var pattern = /(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}) - (\d{2}):(\d{2})/;
-				if(isStart)
+				var pattern = /(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})-(\d{2}):(\d{2})/;
+                console.log(dateString);
+                if(isStart)
 					date = dateString.replace(pattern,'$3-$2-$1T$4:$5:00');
 				else
 					date = dateString.replace(pattern,'$3-$2-$1T$6:$7:00');
 
+                console.log(date);
 				return date;
 			}
 
 				function conferencier(name, image, link) {
 					this.name = sanitize(name);
 					this.img = image;
-					this.link = 'http://afup.org/pages/phptourluxembourg2015/' + link;
+					this.link = 'http://event.afup.org/php-tour-2016/' + link;
 				}
 
 			function conference(id,name,date,horaire,salle,detail,conferenciers) {
@@ -104,7 +112,7 @@ casper.then(function() {
 			}
 
 			$( ".session" ).each(function( index,self ) {
-				var conf_conferenciers = new Array();
+                var conf_conferenciers = new Array();
 				name = $(self).find("h3").text();
 				date = $(self).find(".horaire").text();
 				horaire = $(self).find('.horaire strong').text();
@@ -122,21 +130,20 @@ casper.then(function() {
 					conf_conferenciers.push(new conferencier(conferencier_nom,conferencier_image,conferencier_link));
 				});
 
+                //clean Date
+                date = date.replace(salle, '');
 				conf = new conference(id,name,date,horaire,salle,detail,conf_conferenciers)
 				myTab.push(conf);
 			});
 
 			return myTab;
 		});
-
 });
-
-
 
 casper.run(function() {
 	var fs = require('fs');
 	jsondata = convert2Json(all_confs);
 	fs.write("../data/data.json", jsondata, 'w');
-	require('utils').dump(all_confs[37]);
+	// require('utils').dump(all_confs[37]);
 	this.exit();
 });

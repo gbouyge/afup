@@ -5,7 +5,7 @@ planningPHPTourApp.directive('sessionBtn', function() {
         scope: {
             conf: "=conf"
         },
-        template: ' <button id="btnParticipate" type="button" ng-class="btnClass" class="btn btn-sm addEvent" ng-click="toggle()">{{btnText}}</button>',
+        template: ' <button id="btnParticipate" type="button" ng-class="btnClass" data-session="{{conf.id}}" class="btn btn-sm addEvent" ng-click="toggle()">{{btnText}}</button>',
         link: function (scope, el, attrs) {
             scope.addClass    = 'btn-primary';
             scope.removeClass = 'btn-danger';
@@ -14,6 +14,7 @@ planningPHPTourApp.directive('sessionBtn', function() {
 
             scope.btnClass = scope.addClass;
             scope.btnText  = scope.addText;
+            attrs['data-id'] = scope.conf.id;
 
             scope.toggle = function(){
                 var btnClass = scope.addClass;

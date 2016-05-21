@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 </form>
-                <button id="btnPrint" type="button" class="btn btn-primary btn-sm print" id="print" ng-click="print()">Imprimer mon calendrier</button>
+                <!-- <button id="btnPrint" type="button" class="btn btn-primary btn-sm print" id="print" ng-click="print()">Imprimer mon calendrier</button> -->
             </div>
             <div class="well profile" ng-repeat="conf in confs | langueFilter:selectedLang | filter:searchSalle | textFilter:search | conferencierFilter:selectedConferencier | orderBy:conf.date_start" ng-include="'partials/session.html'"></div>
         </div>
@@ -88,14 +88,15 @@
     <script src="vendor/angular-ui-utils/ui-utils.js"></script>
     <!-- fullcalendar -->
     <script src="vendor/fullcalendar/fullcalendar.js"></script>
-    <!-- app -->    
+    <!-- app -->
     <script src="js/app.js"></script>
+    <script src="js/libs/objectStorage.js"></script>
     <script src="js/filters/ConferencierFilter.js"></script>
     <script src="js/filters/LangueFilter.js"></script>
     <script src="js/filters/TextFilter.js"></script>
     <script src="js/directives/FullCalendarDirective.js"></script>
     <script src="js/directives/SessionButtonDirective.js"></script>
     <script src="js/services/FullCalendarService.js"></script>
-    <script src="js/controllers/PlanningCtrl.js"></script>    
+    <script src="js/controllers/PlanningCtrl.js"></script>
 </body>
 </html>
