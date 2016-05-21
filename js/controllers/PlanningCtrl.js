@@ -1,6 +1,6 @@
 planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', 'fullCalendarService',function($scope, $http, $rootScope, fullCalendarService) {
- 	//Titre de la page
- 	$scope.title = "PHP Tour Luxembourg 2015";
+    //Titre de la page
+    $scope.title = "PHP Tour Clermont‑Ferrand 2016";
 
     //Configuration de la vue
     $scope.hideSession = false;
@@ -9,15 +9,16 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
     $scope.fullSizeCalendarClass = 'col-md-12';
     $scope.normalSizeCalendarClass = 'col-md-7';
     $scope.hiddenClass = 'hidden';
+    $scope.objectStorage = new ObjectStorage('AfupScheduler');
 
     //Conf selectionnées
     $scope.selectedConf = [];
 
     $scope.events = [];
 
-	//Chargement des conférences
-  	$http.get('data/data.json').success(function(data) {
-  		//Save Data
+    //Chargement des conférences
+    $http.get('data/data.json').success(function(data) {
+        //Save Data
         $scope.confs = data;
 
         //Mave Event
@@ -35,9 +36,23 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
         });
 	});
 
+    $scope.loadSelectedConf = function() {
+        angular.forEach($scope.confs, function(conf, key){
+            if(conf.id in $scope.objectStorage.load()) {
+                $scope.toggleSessionButton(conf);
+            }
+        });
+    }
+
+    $scope.toggleSessionButton = function(conf) {
+        //Fix-It Wait the render
+        setTimeout(function() {
+            $('button[data-session="' + conf.id + '"]').click();
+        }, 500);
+    }
+
     $scope.toggleSession = function(conf){
         var addClass = 'savedEvent';
-
         if(conf.id in $scope.selectedConf) {
             var conflitId = $scope.checkConflict(conf);
             if (conflitId) {
@@ -46,6 +61,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
             }
 
             delete($scope.selectedConf[conf.id]);
+            $scope.objectStorage.remove(conf.id);
             addClass = 'defaultEvent';
         } else {
             if($scope.checkConflict(conf)) {
@@ -53,6 +69,7 @@ planningPHPTourApp.controller('planningCtrl', ['$scope','$http', '$rootScope', '
             }
 
             $scope.selectedConf[conf.id] = conf;
+            $scope.objectStorage.set(conf.id, conf);
         }
 
         fullCalendarService.changeClassEvent(conf.id, addClass);

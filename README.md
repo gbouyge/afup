@@ -32,6 +32,12 @@
 > bower install
 
 ## Tools
+
+### Static-server
+
+> npm -g install static-server
+> static-server -i ./index.html
+
 ### CasperJs
 
 > npm install -g phantomjs

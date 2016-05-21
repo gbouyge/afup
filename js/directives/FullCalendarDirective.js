@@ -10,12 +10,12 @@ planningPHPTourApp.directive('fullcalendar', function() {
                     center: '',
                     right: ''
                 },
-                year: 2015,
+                year: 2016,
                 month: 4,
-                date: 13,
+                date: 23,
                 defaultView: "agendaWeek",
                 weekends:false,
-                hiddenDays: [ 1, 4, 5 ],
+                hiddenDays: [ 3, 4, 5 ],
                 editable: false,
                 allDaySlot:false,
                 slotMinutes:15,
@@ -51,6 +51,7 @@ planningPHPTourApp.directive('fullcalendar', function() {
 
             scope.$parent.$watch('events', function(events) {
                 angular.element('#calendar').fullCalendar('addEventSource', scope.$parent.events ,'stick');
+                scope.$parent.loadSelectedConf();
             });
 
             scope.$parent.$watch('hideSession', function() {
