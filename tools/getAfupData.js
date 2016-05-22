@@ -113,7 +113,7 @@ casper.then(function() {
 
 			$( ".session" ).each(function( index,self ) {
                 var conf_conferenciers = new Array();
-				name = $(self).find("h3").text();
+				name = $(self).find("h4").text();
 				date = $(self).find(".horaire").text();
 				horaire = $(self).find('.horaire strong').text();
 				salle = $(self).find(".salle").text();
