@@ -18,11 +18,17 @@ Prêt pour le PHP Tour Clermont 2016
 ### Bower
 
 > sudo apt-get update
+
 > sudo apt-get install python-software-properties python g++ make
+
 > sudo add-apt-repository ppa:chris-lea/node.js
+
 > sudo apt-get update
+
 > sudo apt-get install nodejs
+
 > sudo npm install -g bower
+
 
 ### Vendor
 > bower install
@@ -32,14 +38,17 @@ Prêt pour le PHP Tour Clermont 2016
 ### Static-server
 
 > npm -g install static-server
+
 > static-server -i ./index.html
 
 ### CasperJs
 
 > npm install -g phantomjs
+
 > npm install -g casperjs
 
 ### Récupération des données sur le site de l'afup via CasperJS
 
 > cd tools
+
 > casperjs getAfupData.js
