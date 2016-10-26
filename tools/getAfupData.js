@@ -26,7 +26,7 @@ var casper = require('casper').create({
 
 var debug=true;
 
-casper.start("http://event.afup.org/php-tour-2016/programme/", function() {
+casper.start("http://event.afup.org/forum-php-2016/programme/", function() {
     this.capture('phptour.png');
 });
 
